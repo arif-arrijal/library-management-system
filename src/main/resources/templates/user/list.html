@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragment/head :: rms-head}"></head>
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <header th:insert="~{/fragment/header :: rms-header}"></header>
+    <div th:include="/fragment/drawer :: rms-drawer" class="mdl-layout__drawer"></div>
+    <div th:include="/fragment/snackbar :: rms-snackbar"></div>
+
+    <div class="mdl-layout mdl-js-layout box-center">
+        <main class="mdl-layout__content box-center">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Username</th>
+                    <th>Password</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="user : ${userList}">
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${user.username}"></td>
+                    <td th:text="${user.password}"></td>
+                    <td>
+                        <a id="edit-btn" th:href="@{'/users/' + ${user.id}}" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <div class="mdl-tooltip" data-mdl-for="edit-btn">Edit user</div>
+
+                        <a th:onclick="'deleteData(' + ${user.id} + ')'" id="delete-btn" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <div class="mdl-tooltip" data-mdl-for="delete-btn">Delete user</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <a id="new-btn" th:href="@{/users}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+                <i class="material-icons">add</i>
+            </a>
+            <div class="mdl-tooltip" data-mdl-for="new-btn">Add new user</div>
+
+        </main>
+    </div>
+
+</div>
+</body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    function deleteData(id) {
+        var deleteUrl = /*[[@{/users/}]]*/ '';
+        deleteUrl += id + "/delete";
+        var r = confirm("Are you sure delete this user?");
+        if (r === true) {
+            window.location.assign(deleteUrl);
+        }
+    }
+    /*]]>*/
+
+</script>
+</html>

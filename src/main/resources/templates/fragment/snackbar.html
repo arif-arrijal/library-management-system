@@ -1,0 +1,11 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="rms-snackbar">
+        <div id="message-container" class="mdl-js-snackbar mdl-snackbar">
+            <div class="mdl-snackbar__text"></div>
+            <button class="mdl-snackbar__action" type="button"></button>
+        </div>
+        <input type="hidden" id="successMsg" th:if="${successMsg != null}" th:value="${successMsg}">
+        <input type="hidden" id="errorMsg" th:if="${errorMsg != null}" th:value="${errorMsg}">
+    </div>
+</html>

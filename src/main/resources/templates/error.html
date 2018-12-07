@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragment/head :: rms-head}"></head>
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <header th:insert="~{/fragment/header :: rms-header}"></header>
+    <div th:include="/fragment/drawer :: rms-drawer" class="mdl-layout__drawer"></div>
+
+    <div class="mdl-layout mdl-js-layout box-center">
+        <main class="mdl-layout__content box-center">
+            <h4>LMS Error Page</h4>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <tbody>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Date</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${timestamp}"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Path</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${path}"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Error</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${error}"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Status</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${status}"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Message</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${message}"></td>
+                </tr>
+                <tr>
+                    <td class="mdl-data-table__cell--non-numeric">Exception</td>
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${exception}"></td>
+                </tr>
+                <!--<tr>-->
+                    <!--<td class="mdl-data-table__cell&#45;&#45;non-numeric">Trace</td>-->
+                    <!--<td class="mdl-data-table__cell&#45;&#45;non-numeric">-->
+                        <!--<pre th:text="${trace}"></pre>-->
+                    <!--</td>-->
+                <!--</tr>-->
+                </tbody>
+            </table>
+        </main>
+    </div>
+</div>
+</body>
+</html>

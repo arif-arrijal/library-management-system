@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragment/head :: rms-head}"></head>
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <header th:insert="~{/fragment/header :: rms-header}"></header>
+    <div th:include="/fragment/drawer :: rms-drawer" class="mdl-layout__drawer"></div>
+    <div th:include="/fragment/snackbar :: rms-snackbar"></div>
+
+    <div class="mdl-layout mdl-js-layout box-center">
+        <main class="mdl-layout__content box-center">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <thead>
+                <tr>
+                    <th class="mdl-data-table__cell--non-numeric">Title</th>
+                    <th>Stock</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="book : ${bookList}">
+                    <td class="mdl-data-table__cell--non-numeric" th:text="${book.title}"></td>
+                    <td th:text="${book.stock}"></td>
+                    <td>
+                        <a id="edit-btn" th:href="@{'/books/' + ${book.id}}" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">edit</i>
+                        </a>
+                        <div class="mdl-tooltip" data-mdl-for="edit-btn">Edit book</div>
+
+                        <a th:onclick="'deleteData(' + ${book.id} + ')'" id="delete-btn" class="mdl-button mdl-js-button mdl-button--icon">
+                            <i class="material-icons">delete</i>
+                        </a>
+                        <div class="mdl-tooltip" data-mdl-for="delete-btn">Delete book</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br>
+
+            <a id="new-btn" th:href="@{/books}" class="mdl-button mdl-js-button mdl-button--fab mdl-button--colored mdl-js-ripple-effect">
+                <i class="material-icons">add</i>
+            </a>
+            <div class="mdl-tooltip" data-mdl-for="new-btn">Add new book</div>
+
+        </main>
+    </div>
+
+</div>
+</body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    function deleteData(id) {
+        var deleteUrl = /*[[@{/books/}]]*/ '';
+        deleteUrl += id + "/delete";
+        var r = confirm("Are you sure delete this book?");
+        if (r === true) {
+            window.location.assign(deleteUrl);
+        }
+    }
+    /*]]>*/
+
+</script>
+</html>

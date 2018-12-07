@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:insert="~{/fragment/head :: rms-head}"></head>
+
+<body>
+<div class="mdl-layout mdl-js-layout">
+    <header th:insert="~{/fragment/header :: rms-header}"></header>
+    <div th:include="/fragment/drawer :: rms-drawer" class="mdl-layout__drawer"></div>
+
+    <div class="mdl-layout mdl-js-layout box-center">
+        <main class="mdl-layout__content box-center">
+            <div class="mdl-card mdl-shadow--6dp">
+                <div class="mdl-card__title mdl-color--primary mdl-color-text--white">
+                    <h2 class="mdl-card__title-text" th:text="${user.id != null ? 'Update User' : 'New User'}"></h2>
+                </div>
+                <form th:action="@{/users}" method="post" th:object="${user}">
+                    <div class="mdl-card__supporting-text">
+                        <input type="hidden" id="id" name="id" th:field="*{id}">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="text" id="username" name="username" required th:field="*{username}"/>
+                            <label class="mdl-textfield__label" for="username">Username</label>
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input" type="password" id="password" name="password" th:required="${user.password == null}" th:field="*{password}" th:placeholder="${user.password != null ? 'leave it blank if you do not want to change password' : ''}">
+                            <label class="mdl-textfield__label" for="password">Password</label>
+                        </div>
+                        <div class="mdl-texfield mdl-js-textfield">
+                            <ul>
+                                <li th:each="role : ${roleList}">
+                                    <label>
+                                        <input type="checkbox" th:field="*{roleIdList}" th:value="${role.id}" th:checked="${user.roleIdList.contains(role.id)}"/>
+                                        <span th:text="${role.name}"></span>
+                                    </label>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <button type="submit" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" th:text="${user.id == null ? 'SAVE' : 'UPDATE'}"></button>
+                    </div>
+                </form>
+            </div>
+        </main>
+    </div>
+
+</div>
+</body>
+</html>

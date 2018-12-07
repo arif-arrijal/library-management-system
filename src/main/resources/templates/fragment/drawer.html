@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <div th:fragment="rms-drawer" class="mdl-layout__drawer">
+        <span class="mdl-layout-title" th:text="#{app.short.name}"></span>
+        <nav class="mdl-navigation">
+            <a id="library-menu" class="mdl-navigation__link" href="#">Library</a>
+            <a id="master-data-menu" class="mdl-navigation__link" href="#">Master Data</a>
+            <a class="mdl-navigation__link" th:href="@{/logout}">Logout</a>
+        </nav>
+
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="library-menu">
+            <li class="mdl-menu__item"><a class="mdl-navigation__link" th:href="@{/library/register}">Registering Book</a></li>
+            <li class="mdl-menu__item"><a class="mdl-navigation__link" th:href="@{/library/borrow}">Borrowing Book</a></li>
+        </ul>
+
+        <ul class="mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="master-data-menu">
+            <li class="mdl-menu__item"><a class="mdl-navigation__link" th:href="@{/books/list}">Books</a></li>
+            <li class="mdl-menu__item"><a class="mdl-navigation__link" th:href="@{/users/list}">Users</a></li>
+        </ul>
+    </div>
+</html>
