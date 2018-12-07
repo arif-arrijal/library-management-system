@@ -1,5 +1,6 @@
 package com.mitrais.javabootcamp.service.impl;
 
+import com.mitrais.javabootcamp.config.Constants;
 import com.mitrais.javabootcamp.dao.RoleDao;
 import com.mitrais.javabootcamp.dao.UserDao;
 import com.mitrais.javabootcamp.model.Role;
